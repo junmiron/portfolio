@@ -11,7 +11,7 @@ portfolio/
 ├── templates/              # Jinja2 templates: base.html, index.html, app.html
 ├── scripts/build.py        # generates site/ from manifests + templates
 ├── site/                   # generated output — committed; Vercel serves this as-is
-└── vercel.json             # rootDirectory: "site" (no build step on deploy)
+└── vercel.json             # outputDirectory: "site" (no build step on deploy)
 ```
 
 ## Adding or updating an app
