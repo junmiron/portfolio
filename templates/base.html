@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}junmiron · AI apps{% endblock %}</title>
+<meta name="description" content="{% block description %}AI apps I design, build and ship.{% endblock %}">
+<style>
+  :root {
+    --bg: #0b0d12; --panel: #12151c; --border: #232837;
+    --text: #e6e9f0; --muted: #9aa3b5; --accent: #4f8cff;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+         font: 16px/1.6 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+  header.site { border-bottom: 1px solid var(--border); }
+  header.site .wrap { display: flex; align-items: center; justify-content: space-between; height: 56px; }
+  .brand { font-weight: 600; color: var(--text); letter-spacing: .2px; }
+  nav a { color: var(--muted); margin-left: 16px; }
+  main { padding: 48px 0 64px; }
+  h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; }
+  .lead { color: var(--muted); font-size: 18px; margin: 0 0 32px; }
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px;
+           font-weight: 600; letter-spacing: .4px; text-transform: uppercase; vertical-align: middle; margin-left: 10px; }
+  .badge.live { background: #12351f; color: #4ade80; border: 1px solid #1d5c34; }
+  .badge.beta { background: #3a2e12; color: #fbbf24; border: 1px solid #6b5416; }
+  .badge.prototype { background: #1e2433; color: #9aa3b5; border: 1px solid var(--border); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .card a.title { color: var(--text); display: block; margin-bottom: 6px; font-size: 18px; font-weight: 600; }
+  .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+  section.block { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-top: 20px; }
+  h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin: 0 0 12px; }
+  section.block p { margin: 0; }
+  .chips span { display: inline-block; background: #1a2030; border: 1px solid var(--border); border-radius: 999px;
+                padding: 3px 12px; font-size: 13px; margin: 0 6px 6px 0; color: var(--text); }
+  .links a { display: inline-block; margin-right: 18px; font-weight: 500; }
+  .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 16px; }
+  .shots img { width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block; }
+  video { width: 100%; max-width: 540px; border-radius: 8px; border: 1px solid var(--border); background: #000; }
+  .metric { font-size: 20px; font-weight: 600; color: var(--text); }
+  footer.site { border-top: 1px solid var(--border); color: var(--muted); font-size: 13.5px; padding: 24px 0 40px; }
+  .empty { color: var(--muted); background: var(--panel); border: 1px dashed var(--border); border-radius: 12px; padding: 40px; text-align: center; }
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="/">junmiron · AI apps</a>
+  <nav><a href="/">All apps</a></nav>
+</div></header>
+<main class="wrap">{% block content %}{% endblock %}</main>
+<footer class="site"><div class="wrap">Built and maintained by junmiron. Every app page links to the code and, where deployed, a live demo.</div></footer>
+</body>
+</html>

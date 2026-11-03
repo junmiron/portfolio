@@ -1,0 +1,13 @@
+slug: example-app
+name: Example App
+tagline: Template demo page — replace me with the first real app.
+problem: >-
+  This manifest exists to prove the site pipeline works end-to-end: it renders
+  through templates/app.html and deploys via Vercel on push. When the first
+  real app ships, delete this file and rebuild.
+stack: [Python, FastAPI, LLM]
+status: prototype
+links:
+  github: https://github.com/junmiron/portfolio
+assets: {}
+launched: 2026-11-03

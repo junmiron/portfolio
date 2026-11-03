@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}{{ app.name }} — junmiron{% endblock %}
+{% block description %}{{ app.tagline }}{% endblock %}
+{% block content %}
+<p><a href="/">&larr; All apps</a></p>
+<h1>{{ app.name }}<span class="badge {{ app.status }}">{{ app.status }}</span></h1>
+<p class="lead">{{ app.tagline }}</p>
+
+<section class="block">
+  <h2>Problem</h2>
+  <p>{{ app.problem }}</p>
+</section>
+
+{% if app.stack %}
+<section class="block">
+  <h2>Stack</h2>
+  <div class="chips">{% for s in app.stack %}<span>{{ s }}</span>{% endfor %}</div>
+</section>
+{% endif %}
+
+{% if app.links.github or app.links.huggingface or app.links.demo %}
+<section class="block">
+  <h2>Links</h2>
+  <div class="links">
+    {% if app.links.github %}<a href="{{ app.links.github }}" target="_blank" rel="noopener">GitHub &nearr;</a>{% endif %}
+    {% if app.links.huggingface %}<a href="{{ app.links.huggingface }}" target="_blank" rel="noopener">Hugging Face &nearr;</a>{% endif %}
+    {% if app.links.demo %}<a href="{{ app.links.demo }}" target="_blank" rel="noopener">Live demo &nearr;</a>{% endif %}
+  </div>
+</section>
+{% endif %}
+
+{% if app._video or app._shots %}
+<section class="block">
+  <h2>Demo</h2>
+  {% if app._video %}<video controls preload="metadata"{% if app._cover %} poster="{{ app._cover }}"{% endif %} src="{{ app._video }}"></video>{% endif %}
+  {% if app._shots %}<div class="shots">{% for s in app._shots %}<img src="{{ s }}" alt="{{ app.name }} screenshot">{% endfor %}</div>{% endif %}
+</section>
+{% endif %}
+
+{% if app.metrics %}
+<section class="block">
+  <h2>Result</h2>
+  <p class="metric">{{ app.metrics }}</p>
+</section>
+{% endif %}
+
+{% if app.launched %}<p style="color: var(--muted); font-size: 14px;">Launched {{ app.launched }}.</p>{% endif %}
+{% endblock %}

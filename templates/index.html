@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}junmiron · AI apps{% endblock %}
+{% block content %}
+<h1>AI apps I build</h1>
+<p class="lead">Small, sharp tools for real problems. Each page links to the code and a live demo.</p>
+{% if apps %}
+<div class="grid">
+  {% for app in apps %}
+  <div class="card">
+    <a class="title" href="/{{ app.slug }}/">{{ app.name }}<span class="badge {{ app.status }}">{{ app.status }}</span></a>
+    <p>{{ app.tagline }}</p>
+  </div>
+  {% endfor %}
+</div>
+{% else %}
+<div class="empty">No apps yet — the first launch is in progress.</div>
+{% endif %}
+{% endblock %}
