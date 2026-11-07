@@ -67,7 +67,7 @@
 <h1>BA-GPT<span class="badge beta">beta</span></h1>
 <p class="lead">An AI business analyst that interviews you about your project, then writes the functional spec for you.</p>
 <p class="intro">BA-GPT is an AI business analyst that interviews you about your project, then writes the functional spec for you: a PDF, a process diagram, and a full audit trail linking every requirement back to a question you answered.</p>
-<p class="context">Built as my Master&#39;s thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally with your own LLM key.</p>
+<p class="context">Built as my Master&#39;s thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally, with a local LLM or a cloud LLM — a key is only needed for cloud services.</p>
 
 
 <section class="block">
@@ -80,7 +80,7 @@
 
 <section class="block">
   <h2>TL;DR</h2>
-  <ul class="tldr"><li><strong>What:</strong> An 11-agent team that interviews stakeholders and drafts a 9-section functional spec.</li><li><strong>You get:</strong> PDF, HTML and Markdown spec, Mermaid process diagram, timestamped Q&amp;A trail.</li><li><strong>Why it&#39;s trustworthy:</strong> Every section traces to a logged answer. If a section is missing, a deterministic fallback fills it rather than letting the model invent one.</li><li><strong>Runs on:</strong> Your machine and your key (OpenAI, Azure, Groq, Ollama, LM Studio and more).</li><li><strong>Stack:</strong> Python, AutoGen, FastAPI, React, Typst.</li><li><strong>Status:</strong> v1.3.0 technical preview, MIT licensed.</li></ul>
+  <ul class="tldr"><li><strong>What:</strong> An 11-agent team that interviews stakeholders and drafts a 9-section functional spec.</li><li><strong>You get:</strong> PDF, HTML and Markdown spec, Mermaid process diagram, timestamped Q&amp;A trail.</li><li><strong>Why it&#39;s trustworthy:</strong> Every section traces to a logged answer. If a section is missing, a deterministic fallback fills it rather than letting the model invent one.</li><li><strong>Runs on:</strong> Your machine — a local LLM (Ollama, LM Studio) or a cloud LLM with its key (OpenAI, Azure, Groq and more).</li><li><strong>Stack:</strong> Python, AutoGen, FastAPI, React, Typst.</li><li><strong>Status:</strong> v1.3.0 technical preview, MIT licensed.</li></ul>
 </section>
 
 
@@ -103,7 +103,7 @@
   <p>A session folder with the 9-section FSD (scope, FRs, NFRs, roles, assumptions, use cases, glossary) in Markdown, a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&amp;A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped.</p>
   
   <h3>How do you run it?</h3>
-  <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice. You bring your own API key, configurable per model lane from the in-app settings page. There is no hosted demo.</p>
+  <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice — local (Ollama, LM Studio) or cloud (OpenAI, Azure, Groq). Cloud providers need their API key, configurable per model lane from the in-app settings page. There is no hosted demo.</p>
   
   <h3>What does the test suite cover?</h3>
   <p>An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>

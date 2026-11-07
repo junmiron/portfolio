@@ -2,7 +2,7 @@ slug: ba-gpt
 name: BA-GPT
 tagline: "An AI business analyst that interviews you about your project, then writes the functional spec for you."
 intro: "BA-GPT is an AI business analyst that interviews you about your project, then writes the functional spec for you: a PDF, a process diagram, and a full audit trail linking every requirement back to a question you answered."
-context: "Built as my Master's thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally with your own LLM key."
+context: "Built as my Master's thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally, with a local LLM or a cloud LLM — a key is only needed for cloud services."
 problem: "Requirements work is the slow part of delivery. I wanted to find out whether an agent team could own the interview and draft the spec, with every claim traceable to a logged answer."
 stack: [Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, ChromaDB/RAG, MCP, Mermaid, Pandoc + Typst]
 status: beta
@@ -26,7 +26,7 @@ tldr:
   - label: "Why it's trustworthy"
     text: "Every section traces to a logged answer. If a section is missing, a deterministic fallback fills it rather than letting the model invent one."
   - label: "Runs on"
-    text: "Your machine and your key (OpenAI, Azure, Groq, Ollama, LM Studio and more)."
+    text: "Your machine — a local LLM (Ollama, LM Studio) or a cloud LLM with its key (OpenAI, Azure, Groq and more)."
   - label: "Stack"
     text: "Python, AutoGen, FastAPI, React, Typst."
   - label: "Status"
@@ -39,7 +39,7 @@ sections:
   - title: "What do you get at the end of a run?"
     body: "A session folder with the 9-section FSD (scope, FRs, NFRs, roles, assumptions, use cases, glossary) in Markdown, a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped."
   - title: "How do you run it?"
-    body: "Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice. You bring your own API key, configurable per model lane from the in-app settings page. There is no hosted demo."
+    body: "Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice — local (Ollama, LM Studio) or cloud (OpenAI, Azure, Groq). Cloud providers need their API key, configurable per model lane from the in-app settings page. There is no hosted demo."
   - title: "What does the test suite cover?"
     body: "An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering."
 limitations:
