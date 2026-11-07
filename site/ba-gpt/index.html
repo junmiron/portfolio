@@ -55,6 +55,41 @@
 <p><a href="/">&larr; All apps</a></p>
 <h1>BA-GPT<span class="badge beta">beta</span></h1>
 <p class="lead">A local-first AI business analyst that interviews you about your project and writes a traceable functional spec, process diagram and PDF.</p>
+<p class="intro">BA-GPT (v1.3.0) is a local-first, multi-agent business analyst that runs a budgeted, deterministic requirements interview with a human and produces a traceable Functional Specification Document. It is part of a Master&#39;s thesis (TFM) on multi-agent requirements elicitation. Core claim for analysts: the interview can run itself, and every deliverable traces back to a logged Q&amp;A.</p>
+
+
+<section class="block">
+  <h2>TL;DR</h2>
+  <ul class="tldr"><li><strong>What:</strong> 11-agent AutoGen team (selector group chat) that interviews stakeholders and writes a 9-section functional spec.</li><li><strong>Output:</strong> FSD in PDF, HTML and Markdown; Mermaid process diagrams; full Q&amp;A audit trail.</li><li><strong>Budget:</strong> Runs are capped by MAX_MESSAGES (default 300); only terminate_agent can end a run.</li><li><strong>Runs on:</strong> Your machine, your LLM key. OpenAI, Azure, Groq, Hugging Face, GitHub, Ollama, LM Studio or a local server.</li><li><strong>Status:</strong> v1.3.0 technical preview. MIT licensed. Beta.</li></ul>
+</section>
+
+
+
+<section class="block">
+  <h2>What is BA-GPT?</h2>
+  <p>BA-GPT is a local-first AI business analyst. It runs a budgeted, deterministic requirements interview with a human and drafts the functional spec, process diagrams and deliverables as reviewable artifacts. The interview is interactive by design: a human answers every question unless human simulation is enabled. The React web UI is the operator front-end; the Chainlit view is a debug surface, not a product.</p>
+</section>
+
+<section class="block">
+  <h2>How does the 11-agent pipeline work?</h2>
+  <p>Eleven agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&amp;A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written.</p>
+</section>
+
+<section class="block">
+  <h2>What do you get at the end of a run?</h2>
+  <p>A session folder with the 9-section FSD (scope, FRs, NFRs, roles, assumptions, use cases, glossary) in Markdown, a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&amp;A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped.</p>
+</section>
+
+<section class="block">
+  <h2>How do you run it?</h2>
+  <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice. You bring your own API key, configurable per model lane from the in-app settings page. There is no hosted demo.</p>
+</section>
+
+<section class="block">
+  <h2>What does the test suite cover?</h2>
+  <p>An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>
+</section>
+
 
 <section class="block">
   <h2>Problem</h2>
@@ -86,6 +121,12 @@
   
 </section>
 
+
+
+<section class="block">
+  <h2>Key Takeaways</h2>
+  <ul><li>11 agents in one AutoGen selector group chat; hand-offs are driven by explicit markers.</li><li>Every run is budgeted (default 300 messages) and only terminate_agent can end it.</li><li>The checker caps at three rounds, then a deterministic fallback fills the gaps. No hallucinated sections.</li><li>Local-first: your machine, your LLM key, nothing hosted.</li><li>v1.3.0 technical preview, MIT licensed; details may still move.</li></ul>
+</section>
 
 
 

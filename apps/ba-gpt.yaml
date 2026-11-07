@@ -9,4 +9,33 @@ links:
 assets:
   video_short: short.mp4
   cover: cover.jpg
+intro: "BA-GPT (v1.3.0) is a local-first, multi-agent business analyst that runs a budgeted, deterministic requirements interview with a human and produces a traceable Functional Specification Document. It is part of a Master's thesis (TFM) on multi-agent requirements elicitation. Core claim for analysts: the interview can run itself, and every deliverable traces back to a logged Q&A."
+tldr:
+  - label: "What"
+    text: "11-agent AutoGen team (selector group chat) that interviews stakeholders and writes a 9-section functional spec."
+  - label: "Output"
+    text: "FSD in PDF, HTML and Markdown; Mermaid process diagrams; full Q&A audit trail."
+  - label: "Budget"
+    text: "Runs are capped by MAX_MESSAGES (default 300); only terminate_agent can end a run."
+  - label: "Runs on"
+    text: "Your machine, your LLM key. OpenAI, Azure, Groq, Hugging Face, GitHub, Ollama, LM Studio or a local server."
+  - label: "Status"
+    text: "v1.3.0 technical preview. MIT licensed. Beta."
+sections:
+  - title: "What is BA-GPT?"
+    body: "BA-GPT is a local-first AI business analyst. It runs a budgeted, deterministic requirements interview with a human and drafts the functional spec, process diagrams and deliverables as reviewable artifacts. The interview is interactive by design: a human answers every question unless human simulation is enabled. The React web UI is the operator front-end; the Chainlit view is a debug surface, not a product."
+  - title: "How does the 11-agent pipeline work?"
+    body: "Eleven agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written."
+  - title: "What do you get at the end of a run?"
+    body: "A session folder with the 9-section FSD (scope, FRs, NFRs, roles, assumptions, use cases, glossary) in Markdown, a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped."
+  - title: "How do you run it?"
+    body: "Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice. You bring your own API key, configurable per model lane from the in-app settings page. There is no hosted demo."
+  - title: "What does the test suite cover?"
+    body: "An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering."
+takeaways:
+  - "11 agents in one AutoGen selector group chat; hand-offs are driven by explicit markers."
+  - "Every run is budgeted (default 300 messages) and only terminate_agent can end it."
+  - "The checker caps at three rounds, then a deterministic fallback fills the gaps. No hallucinated sections."
+  - "Local-first: your machine, your LLM key, nothing hosted."
+  - "v1.3.0 technical preview, MIT licensed; details may still move."
 launched: 2026-11-07

@@ -5,6 +5,21 @@
 <p><a href="/">&larr; All apps</a></p>
 <h1>{{ app.name }}<span class="badge {{ app.status }}">{{ app.status }}</span></h1>
 <p class="lead">{{ app.tagline }}</p>
+{% if app.intro %}<p class="intro">{{ app.intro }}</p>{% endif %}
+
+{% if app.tldr %}
+<section class="block">
+  <h2>TL;DR</h2>
+  <ul class="tldr">{% for item in app.tldr %}<li><strong>{{ item.label }}:</strong> {{ item.text }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% for s in app.sections or [] %}
+<section class="block">
+  <h2>{{ s.title }}</h2>
+  <p>{{ s.body }}</p>
+</section>
+{% endfor %}
 
 <section class="block">
   <h2>Problem</h2>
@@ -37,6 +52,12 @@
 </section>
 {% endif %}
 
+{% if app.takeaways %}
+<section class="block">
+  <h2>Key Takeaways</h2>
+  <ul>{% for t in app.takeaways %}<li>{{ t }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
 {% if app.metrics %}
 <section class="block">
   <h2>Result</h2>
