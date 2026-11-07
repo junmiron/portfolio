@@ -6,43 +6,7 @@
 <h1>{{ app.name }}<span class="badge {{ app.status }}">{{ app.status }}</span></h1>
 <p class="lead">{{ app.tagline }}</p>
 {% if app.intro %}<p class="intro">{{ app.intro }}</p>{% endif %}
-
-{% if app.tldr %}
-<section class="block">
-  <h2>TL;DR</h2>
-  <ul class="tldr">{% for item in app.tldr %}<li><strong>{{ item.label }}:</strong> {{ item.text }}</li>{% endfor %}</ul>
-</section>
-{% endif %}
-
-{% for s in app.sections or [] %}
-<section class="block">
-  <h2>{{ s.title }}</h2>
-  <p>{{ s.body }}</p>
-</section>
-{% endfor %}
-
-<section class="block">
-  <h2>Problem</h2>
-  <p>{{ app.problem }}</p>
-</section>
-
-{% if app.stack %}
-<section class="block">
-  <h2>Stack</h2>
-  <div class="chips">{% for s in app.stack %}<span>{{ s }}</span>{% endfor %}</div>
-</section>
-{% endif %}
-
-{% if app.links.github or app.links.huggingface or app.links.demo %}
-<section class="block">
-  <h2>Links</h2>
-  <div class="links">
-    {% if app.links.github %}<a href="{{ app.links.github }}" target="_blank" rel="noopener">GitHub &nearr;</a>{% endif %}
-    {% if app.links.huggingface %}<a href="{{ app.links.huggingface }}" target="_blank" rel="noopener">Hugging Face &nearr;</a>{% endif %}
-    {% if app.links.demo %}<a href="{{ app.links.demo }}" target="_blank" rel="noopener">Live demo &nearr;</a>{% endif %}
-  </div>
-</section>
-{% endif %}
+{% if app.context %}<p class="context">{{ app.context }}</p>{% endif %}
 
 {% if app._video or app._shots %}
 <section class="block">
@@ -52,12 +16,72 @@
 </section>
 {% endif %}
 
-{% if app.takeaways %}
+{% if app.tldr %}
 <section class="block">
-  <h2>Key Takeaways</h2>
-  <ul>{% for t in app.takeaways %}<li>{{ t }}</li>{% endfor %}</ul>
+  <h2>TL;DR</h2>
+  <ul class="tldr">{% for item in app.tldr %}<li><strong>{{ item.label }}:</strong> {{ item.text }}</li>{% endfor %}</ul>
 </section>
 {% endif %}
+
+<section class="block">
+  <h2>Problem</h2>
+  <p>{{ app.problem }}</p>
+</section>
+
+{% if app.sections %}
+<section class="block">
+  <h2>How it works</h2>
+  {% for s in app.sections %}
+  <h3>{{ s.title }}</h3>
+  <p>{{ s.body }}</p>
+  {% endfor %}
+</section>
+{% endif %}
+
+{% if app.stack %}
+<section class="block">
+  <h2>Stack</h2>
+  <div class="chips">{% for s in app.stack %}<span>{{ s }}</span>{% endfor %}</div>
+</section>
+{% endif %}
+
+{% if app.sample %}
+<section class="block">
+  <h2>Sample output</h2>
+  <p>{{ app.sample.note }}</p>
+  {% if app.sample.diagram %}<figure><img src="/assets/{{ app.slug }}/sample/{{ app.sample.diagram }}" alt="Output from a sample run of {{ app.name }}">{% if app.sample.quote %}<figcaption>{{ app.sample.quote }}</figcaption>{% endif %}</figure>{% endif %}
+  {% if app.sample.downloads %}
+  <div class="links">{% for d in app.sample.downloads %}<a href="/assets/{{ app.slug }}/sample/{{ d }}" download>{{ d }} &nearr;</a>{% endfor %}</div>
+  {% endif %}
+</section>
+{% endif %}
+
+{% if app.limitations %}
+<section class="block">
+  <h2>Limitations</h2>
+  <ul>{% for t in app.limitations %}<li>{{ t }}</li>{% endfor %}</ul>
+</section>
+{% endif %}
+
+{% if app.next_steps %}
+<section class="block">
+  <h2>Next steps</h2>
+  <p>{{ app.next_steps }}</p>
+</section>
+{% endif %}
+
+{% if app.links.github or app.links.huggingface or app.links.demo or app.links.contact %}
+<section class="block">
+  <h2>Links</h2>
+  <div class="links">
+    {% if app.links.github %}<a href="{{ app.links.github }}" target="_blank" rel="noopener">GitHub &nearr;</a>{% endif %}
+    {% if app.links.huggingface %}<a href="{{ app.links.huggingface }}" target="_blank" rel="noopener">Hugging Face &nearr;</a>{% endif %}
+    {% if app.links.demo %}<a href="{{ app.links.demo }}" target="_blank" rel="noopener">Live demo &nearr;</a>{% endif %}
+    {% if app.links.contact %}<a href="{{ app.links.contact }}" target="_blank" rel="noopener">Contact &nearr;</a>{% endif %}
+  </div>
+</section>
+{% endif %}
+
 {% if app.metrics %}
 <section class="block">
   <h2>Result</h2>

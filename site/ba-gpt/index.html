@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>BA-GPT — junmiron</title>
-<meta name="description" content="A local-first AI business analyst that interviews you about your project and writes a traceable functional spec, process diagram and PDF.">
+<meta name="description" content="An AI business analyst that interviews you about your project, then writes the functional spec for you.">
 <style>
   :root {
     --bg: #0b0d12; --panel: #12151c; --border: #232837;
@@ -23,6 +23,17 @@
   main { padding: 48px 0 64px; }
   h1 { font-size: 34px; line-height: 1.2; margin: 0 0 8px; }
   .lead { color: var(--muted); font-size: 18px; margin: 0 0 32px; }
+  .intro { font-size: 18.5px; line-height: 1.55; margin: 0 0 12px; }
+  .context { color: var(--muted); font-size: 14.5px; margin: 0 0 28px; }
+  section.block h3 { font-size: 15px; margin: 18px 0 4px; color: var(--text); }
+  section.block h3:first-of-type { margin-top: 0; }
+  .tldr { margin: 0; padding-left: 20px; }
+  .tldr li { margin: 0 0 8px; }
+  .tldr li:last-child { margin-bottom: 0; }
+  .tldr strong { color: var(--text); font-weight: 600; }
+  figure { margin: 14px 0; }
+  figure img { width: 100%; max-width: 720px; border-radius: 8px; border: 1px solid var(--border); display: block; }
+  figcaption { color: var(--muted); font-size: 13.5px; font-style: italic; margin-top: 8px; }
   .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 12px;
            font-weight: 600; letter-spacing: .4px; text-transform: uppercase; vertical-align: middle; margin-left: 10px; }
   .badge.live { background: #12351f; color: #4ade80; border: 1px solid #1d5c34; }
@@ -54,47 +65,51 @@
 <main class="wrap">
 <p><a href="/">&larr; All apps</a></p>
 <h1>BA-GPT<span class="badge beta">beta</span></h1>
-<p class="lead">A local-first AI business analyst that interviews you about your project and writes a traceable functional spec, process diagram and PDF.</p>
-<p class="intro">BA-GPT (v1.3.0) is a local-first, multi-agent business analyst that runs a budgeted, deterministic requirements interview with a human and produces a traceable Functional Specification Document. It is part of a Master&#39;s thesis (TFM) on multi-agent requirements elicitation. Core claim for analysts: the interview can run itself, and every deliverable traces back to a logged Q&amp;A.</p>
+<p class="lead">An AI business analyst that interviews you about your project, then writes the functional spec for you.</p>
+<p class="intro">BA-GPT is an AI business analyst that interviews you about your project, then writes the functional spec for you: a PDF, a process diagram, and a full audit trail linking every requirement back to a question you answered.</p>
+<p class="context">Built as my Master&#39;s thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally with your own LLM key.</p>
+
+
+<section class="block">
+  <h2>Demo</h2>
+  <video controls preload="metadata" poster="/assets/ba-gpt/cover.jpg" src="/assets/ba-gpt/short.mp4"></video>
+  <div class="shots"><img src="/assets/ba-gpt/screenshots/1-interview.jpg" alt="BA-GPT screenshot"><img src="/assets/ba-gpt/screenshots/2-settings.jpg" alt="BA-GPT screenshot"></div>
+</section>
+
 
 
 <section class="block">
   <h2>TL;DR</h2>
-  <ul class="tldr"><li><strong>What:</strong> 11-agent AutoGen team (selector group chat) that interviews stakeholders and writes a 9-section functional spec.</li><li><strong>Output:</strong> FSD in PDF, HTML and Markdown; Mermaid process diagrams; full Q&amp;A audit trail.</li><li><strong>Budget:</strong> Runs are capped by MAX_MESSAGES (default 300); only terminate_agent can end a run.</li><li><strong>Runs on:</strong> Your machine, your LLM key. OpenAI, Azure, Groq, Hugging Face, GitHub, Ollama, LM Studio or a local server.</li><li><strong>Status:</strong> v1.3.0 technical preview. MIT licensed. Beta.</li></ul>
-</section>
-
-
-
-<section class="block">
-  <h2>What is BA-GPT?</h2>
-  <p>BA-GPT is a local-first AI business analyst. It runs a budgeted, deterministic requirements interview with a human and drafts the functional spec, process diagrams and deliverables as reviewable artifacts. The interview is interactive by design: a human answers every question unless human simulation is enabled. The React web UI is the operator front-end; the Chainlit view is a debug surface, not a product.</p>
-</section>
-
-<section class="block">
-  <h2>How does the 11-agent pipeline work?</h2>
-  <p>Eleven agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&amp;A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written.</p>
-</section>
-
-<section class="block">
-  <h2>What do you get at the end of a run?</h2>
-  <p>A session folder with the 9-section FSD (scope, FRs, NFRs, roles, assumptions, use cases, glossary) in Markdown, a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&amp;A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped.</p>
-</section>
-
-<section class="block">
-  <h2>How do you run it?</h2>
-  <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice. You bring your own API key, configurable per model lane from the in-app settings page. There is no hosted demo.</p>
-</section>
-
-<section class="block">
-  <h2>What does the test suite cover?</h2>
-  <p>An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>
+  <ul class="tldr"><li><strong>What:</strong> An 11-agent team that interviews stakeholders and drafts a 9-section functional spec.</li><li><strong>You get:</strong> PDF, HTML and Markdown spec, Mermaid process diagram, timestamped Q&amp;A trail.</li><li><strong>Why it&#39;s trustworthy:</strong> Every section traces to a logged answer. If a section is missing, a deterministic fallback fills it rather than letting the model invent one.</li><li><strong>Runs on:</strong> Your machine and your key (OpenAI, Azure, Groq, Ollama, LM Studio and more).</li><li><strong>Stack:</strong> Python, AutoGen, FastAPI, React, Typst.</li><li><strong>Status:</strong> v1.3.0 technical preview, MIT licensed.</li></ul>
 </section>
 
 
 <section class="block">
   <h2>Problem</h2>
-  <p>Requirements work is slow: analysts interview stakeholders, then hand-write the spec, diagrams and deliverables. BA-GPT (v1.3.0 technical preview) runs a budgeted, deterministic interview with an 11-agent AutoGen team and drafts all of it as reviewable artifacts — FSD in PDF, HTML and Markdown, Mermaid process diagrams, and a full Q&amp;A audit trail. It runs on your own machine with your own LLM key; there is no hosted demo.</p>
+  <p>Requirements work is the slow part of delivery. I wanted to find out whether an agent team could own the interview and draft the spec, with every claim traceable to a logged answer.</p>
 </section>
+
+
+<section class="block">
+  <h2>How it works</h2>
+  
+  <h3>How does the 11-agent pipeline work?</h3>
+  <p>Eleven agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&amp;A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written.</p>
+  
+  <h3>How is the interview budgeted?</h3>
+  <p>Runs are capped by MAX_MESSAGES (default 300) and can only be ended by terminate_agent. The interviewer asks exactly one question per turn, and while the team waits for an answer, only the user may speak. Hand-offs are driven by explicit markers, not free conversation, so a run cannot drift or loop.</p>
+  
+  <h3>What do you get at the end of a run?</h3>
+  <p>A session folder with the 9-section FSD (scope, FRs, NFRs, roles, assumptions, use cases, glossary) in Markdown, a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&amp;A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped.</p>
+  
+  <h3>How do you run it?</h3>
+  <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice. You bring your own API key, configurable per model lane from the in-app settings page. There is no hosted demo.</p>
+  
+  <h3>What does the test suite cover?</h3>
+  <p>An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>
+  
+</section>
+
 
 
 <section class="block">
@@ -105,28 +120,40 @@
 
 
 <section class="block">
-  <h2>Links</h2>
-  <div class="links">
-    <a href="https://github.com/junmiron/TFM_BA_GPT_final" target="_blank" rel="noopener">GitHub &nearr;</a>
-    
-    
-  </div>
-</section>
-
-
-
-<section class="block">
-  <h2>Demo</h2>
-  <video controls preload="metadata" poster="/assets/ba-gpt/cover.jpg" src="/assets/ba-gpt/short.mp4"></video>
+  <h2>Sample output</h2>
+  <p>A real session: a laundry-service shop app, run end to end.</p>
+  <figure><img src="/assets/ba-gpt/sample/process_diagram.png" alt="Output from a sample run of BA-GPT"><figcaption>QUESTION: What is the primary end-to-end service flow for the Laundry Service Shop app, from customer request pickup to delivery?</figcaption></figure>
+  
+  <div class="links"><a href="/assets/ba-gpt/sample/functional_specification.pdf" download>functional_specification.pdf &nearr;</a><a href="/assets/ba-gpt/sample/functional_specification.html" download>functional_specification.html &nearr;</a><a href="/assets/ba-gpt/sample/functional_specification.md" download>functional_specification.md &nearr;</a></div>
   
 </section>
 
 
 
 <section class="block">
-  <h2>Key Takeaways</h2>
-  <ul><li>11 agents in one AutoGen selector group chat; hand-offs are driven by explicit markers.</li><li>Every run is budgeted (default 300 messages) and only terminate_agent can end it.</li><li>The checker caps at three rounds, then a deterministic fallback fills the gaps. No hallucinated sections.</li><li>Local-first: your machine, your LLM key, nothing hosted.</li><li>v1.3.0 technical preview, MIT licensed; details may still move.</li></ul>
+  <h2>Limitations</h2>
+  <ul><li>The interview is interactive: a human must answer every question unless human simulation is enabled.</li><li>The summarizer only accepts the exact phrase APPROVE SUMMARY.</li><li>The config endpoint is unauthenticated and intended for local, single-user use.</li><li>The Chainlit view is a debug surface, not a finished product; the React UI is the front-end.</li></ul>
 </section>
+
+
+
+<section class="block">
+  <h2>Next steps</h2>
+  <p>Porting the agent layer off AutoGen (no longer being developed) to the frameworks that own the market: LangChain, Microsoft Agent Framework and LangGraph.</p>
+</section>
+
+
+
+<section class="block">
+  <h2>Links</h2>
+  <div class="links">
+    <a href="https://github.com/junmiron/TFM_BA_GPT_final" target="_blank" rel="noopener">GitHub &nearr;</a>
+    
+    
+    <a href="https://www.linkedin.com/in/juanmanuelmiron/" target="_blank" rel="noopener">Contact &nearr;</a>
+  </div>
+</section>
+
 
 
 

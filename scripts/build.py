@@ -68,7 +68,7 @@ def load_manifests():
         # normalize optional fields for the templates
         data.setdefault("stack", [])
         links = dict(data.get("links") or {})
-        for k in ("github", "huggingface", "demo"):
+        for k in ("github", "huggingface", "demo", "contact"):
             links[k] = links.get(k) or None
         data["links"] = links
         data["metrics"] = data.get("metrics") or None
