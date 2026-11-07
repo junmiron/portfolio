@@ -1,0 +1,12 @@
+slug: ba-gpt
+name: BA-GPT
+tagline: "A local-first AI business analyst that interviews you about your project and writes a traceable functional spec, process diagram and PDF."
+problem: "Requirements work is slow: analysts interview stakeholders, then hand-write the spec, diagrams and deliverables. BA-GPT (v1.3.0 technical preview) runs a budgeted, deterministic interview with an 11-agent AutoGen team and drafts all of it as reviewable artifacts — FSD in PDF, HTML and Markdown, Mermaid process diagrams, and a full Q&A audit trail. It runs on your own machine with your own LLM key; there is no hosted demo."
+stack: [Python, AutoGen 0.7.5, FastAPI, React/Vite, MCP, Typst]
+status: beta
+links:
+  github: https://github.com/junmiron/TFM_BA_GPT_final
+assets:
+  video_short: short.mp4
+  cover: cover.jpg
+launched: 2026-11-07
