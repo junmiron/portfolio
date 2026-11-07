@@ -4,7 +4,7 @@ tagline: "An AI business analyst that interviews you about your project, then wr
 intro: "BA-GPT is an AI business analyst that interviews you about your project, then writes the functional spec for you: a PDF, a process diagram, and a full audit trail linking every requirement back to a question you answered."
 context: "Built as my Master's thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally with your own LLM key."
 problem: "Requirements work is the slow part of delivery. I wanted to find out whether an agent team could own the interview and draft the spec, with every claim traceable to a logged answer."
-stack: [Python, AutoGen 0.7.5, FastAPI, React/Vite, MCP, Typst]
+stack: [Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, ChromaDB/RAG, MCP, Mermaid, Pandoc + Typst]
 status: beta
 links:
   github: https://github.com/junmiron/TFM_BA_GPT_final
