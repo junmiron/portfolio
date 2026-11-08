@@ -7,7 +7,7 @@ problem: "Requirements work is the slow part of delivery. I wanted to find out w
 stack: [Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, ChromaDB/RAG, MCP, Mermaid, Pandoc + Typst]
 status: beta
 links:
-  github: https://github.com/junmiron/TFM_BA_GPT_final
+  github: https://github.com/junmiron/ba-gpt
   demo: /ba-gpt/demo/
   contact: https://www.linkedin.com/in/juanmanuelmiron/
 assets:
