@@ -10,7 +10,8 @@ name: My App
 tagline: One-line value proposition
 problem: What it solves and for whom
 stack: [Python, FastAPI, LLM-X]
-status: live | beta | prototype
+featured: true                         # optional; highlight one project on the home page
+status: live | beta | technical preview | prototype
 links:
   github: https://github.com/<user>/<repo>
   huggingface: https://huggingface.co/spaces/<user>/<space>   # or /models/...
@@ -57,6 +58,7 @@ launched: YYYY-MM-DD
 9. Limitations (honest), then Next steps (one line)
 10. Links: code, demo, contact
 
+Homepage cards can set `featured: true` to highlight an intentional first project. The featured card uses the first screenshot and up to three stack tags; maintain one featured project until more real app manifests exist.
 Required fields: `slug`, `name`, `tagline`, `problem`, `status`. Everything else is optional. If a field you want to show is missing or stale, ask the user (or read the app's repo README) — do not guess. Unknown numbers ship as `{{your number}}` in copy; they are never invented.
 
 ## Filled example

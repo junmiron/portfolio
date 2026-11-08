@@ -3,8 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>junmiron · AI apps</title>
-<meta name="description" content="AI apps I design, build and ship.">
+<title>Juan Manuel Miron · AI products</title>
+<meta name="description" content="Juan Manuel Miron Lubieniecki builds practical AI products, drawing on telecom engineering, product delivery and a Master's in Artificial Intelligence.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Juan Manuel Miron · AI products">
+<meta property="og:description" content="Telecom engineer turned AI builder. Practical AI apps, from multi-agent systems to product delivery.">
+<meta property="og:url" content="https://portfolio-jun-9193.vercel.app/">
+<meta property="og:image" content="https://portfolio-jun-9193.vercel.app/assets/ba-gpt/og-portfolio.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jun Mirón and the BA-GPT application interface">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
   :root {
     --bg: #0b0d12; --panel: #12151c; --border: #232837;
@@ -41,6 +52,22 @@
   .badge.prototype { background: #1e2433; color: #9aa3b5; border: 1px solid var(--border); }
   .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
   .card { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .card-featured { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 10px; }
+  .featured-card { grid-column: 1 / -1; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(260px, 1fr); gap: 24px; align-items: center; }
+  .card-shot { width: 100%; aspect-ratio: 2.3 / 1; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }
+  .card-title-row { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+  .card-title-row .badge { margin-left: 0; flex: 0 0 auto; }
+  .card-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+  .card-tags span { background: #1a2030; border: 1px solid var(--border); border-radius: 999px; padding: 2px 9px; font-size: 12px; color: var(--muted); }
+  .card-cta { display: inline-block; margin-top: 16px; font-size: 14px; font-weight: 600; }
+  .hero { margin-bottom: 40px; }
+  .hero h1 { font-size: clamp(34px, 5vw, 48px); margin-bottom: 12px; }
+  .hero .lead { max-width: 760px; margin-bottom: 18px; }
+  .hero-links a { margin-right: 14px; font-weight: 600; }
+  .projects-heading { margin: 42px 0 8px; color: var(--text); font-size: 22px; text-transform: none; letter-spacing: 0; }
+  .footer-links { display: inline-flex; flex-wrap: wrap; gap: 14px; margin-left: 12px; }
+  .footer-links a { color: var(--muted); }
+  @media (max-width: 640px) { .wrap { padding: 0 16px; } main { padding: 32px 0 48px; } .hero h1 { font-size: 34px; } .featured-card { grid-template-columns: 1fr; gap: 16px; } .card-title-row { align-items: flex-start; flex-direction: column; } }
   .card a.title { color: var(--text); display: block; margin-bottom: 6px; font-size: 18px; font-weight: 600; }
   .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
   section.block { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-top: 20px; }
@@ -62,22 +89,35 @@
 <body>
 <header class="site"><div class="wrap">
   <a class="brand" href="/">junmiron · AI apps</a>
-  <nav><a href="/">All apps</a></nav>
+  <nav><a href="/#about">About</a></nav>
 </div></header>
 <main class="wrap">
-<h1>AI apps I build</h1>
-<p class="lead">Small, sharp tools for real problems. Each page links to the code and a live demo.</p>
+<section class="hero" id="about">
+  <h1>Hi, I’m Juan Manuel. I build AI products.</h1>
+  <p class="lead">Telecom engineer turned AI builder, with a Master’s in Artificial Intelligence. I bring 15+ years in technology delivery and product/project management to building practical AI tools. I’m exploring AI project and product management opportunities.</p>
+  <p class="hero-links"><a href="https://www.linkedin.com/in/juanmanuelmiron/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/junmiron" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:junmiron@gmail.com">Email</a></p>
+</section>
+<h2 class="projects-heading" id="projects">Selected projects</h2>
+<p class="lead">Small, sharp tools for real problems. Each page links to the code and a demo or sample output.</p>
 
 <div class="grid">
   
-  <div class="card">
-    <a class="title" href="/ba-gpt/">BA-GPT<span class="badge technical preview">technical preview</span></a>
-    <p>An AI business analyst that interviews you about your project, then writes the functional spec for you.</p>
-  </div>
+  <article class="card featured-card">
+    <div class="card-media">
+      <a href="/ba-gpt/"><img class="card-shot" src="/assets/ba-gpt/screenshots/ba-gpt-react-ui.png" alt="BA-GPT application interface"></a>
+    </div>
+    <div class="card-content">
+      <div class="card-featured">Featured project</div>
+      <div class="card-title-row"><a class="title" href="/ba-gpt/">BA-GPT</a><span class="badge technical preview">technical preview</span></div>
+      <p>An AI business analyst that interviews you about your project, then writes the functional spec for you.</p>
+      <div class="card-tags" aria-label="BA-GPT technology stack"><span>Python</span><span>AutoGen (SelectorGroupChat)</span><span>FastAPI</span></div>
+      <a class="card-cta" href="/ba-gpt/">View project <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </article>
   
 </div>
 
 </main>
-<footer class="site"><div class="wrap">Built and maintained by junmiron. Every app page links to the code and, where deployed, a live demo.</div></footer>
+<footer class="site"><div class="wrap">Built and maintained by junmiron. <span class="footer-links"><a href="https://www.linkedin.com/in/juanmanuelmiron/">LinkedIn</a><a href="https://github.com/junmiron">GitHub</a><a href="mailto:junmiron@gmail.com">Email</a></span></div></footer>
 </body>
 </html>

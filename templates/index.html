@@ -1,15 +1,40 @@
 {% extends "base.html" %}
-{% block title %}junmiron · AI apps{% endblock %}
+{% block title %}Juan Manuel Miron · AI products{% endblock %}
+{% block description %}Juan Manuel Miron Lubieniecki builds practical AI products, drawing on telecom engineering, product delivery and a Master's in Artificial Intelligence.{% endblock %}
+{% block social_meta %}
+<meta property="og:type" content="website">
+<meta property="og:title" content="Juan Manuel Miron · AI products">
+<meta property="og:description" content="Telecom engineer turned AI builder. Practical AI apps, from multi-agent systems to product delivery.">
+<meta property="og:url" content="https://portfolio-jun-9193.vercel.app/">
+<meta property="og:image" content="https://portfolio-jun-9193.vercel.app/assets/ba-gpt/og-portfolio.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Jun Mirón and the BA-GPT application interface">
+<meta name="twitter:card" content="summary_large_image">
+{% endblock %}
 {% block content %}
-<h1>AI apps I build</h1>
-<p class="lead">Small, sharp tools for real problems. Each page links to the code and a live demo.</p>
+<section class="hero" id="about">
+  <h1>Hi, I’m Juan Manuel. I build AI products.</h1>
+  <p class="lead">Telecom engineer turned AI builder, with a Master’s in Artificial Intelligence. I bring 15+ years in technology delivery and product/project management to building practical AI tools. I’m exploring AI project and product management opportunities.</p>
+  <p class="hero-links"><a href="https://www.linkedin.com/in/juanmanuelmiron/" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/junmiron" target="_blank" rel="noopener">GitHub</a> · <a href="mailto:junmiron@gmail.com">Email</a></p>
+</section>
+<h2 class="projects-heading" id="projects">Selected projects</h2>
+<p class="lead">Small, sharp tools for real problems. Each page links to the code and a demo or sample output.</p>
 {% if apps %}
 <div class="grid">
   {% for app in apps %}
-  <div class="card">
-    <a class="title" href="/{{ app.slug }}/">{{ app.name }}<span class="badge {{ app.status }}">{{ app.status }}</span></a>
-    <p>{{ app.tagline }}</p>
-  </div>
+  <article class="card{% if app.featured %} featured-card{% endif %}">
+    <div class="card-media">
+      {% if app.assets.screenshots %}<a href="/{{ app.slug }}/"><img class="card-shot" src="/assets/{{ app.slug }}/screenshots/{{ app.assets.screenshots[0] }}" alt="{{ app.name }} application interface"></a>{% endif %}
+    </div>
+    <div class="card-content">
+      {% if app.featured %}<div class="card-featured">Featured project</div>{% endif %}
+      <div class="card-title-row"><a class="title" href="/{{ app.slug }}/">{{ app.name }}</a><span class="badge {{ app.status }}">{{ app.status }}</span></div>
+      <p>{{ app.tagline }}</p>
+      {% if app.stack %}<div class="card-tags" aria-label="{{ app.name }} technology stack">{% for item in app.stack[:3] %}<span>{{ item }}</span>{% endfor %}</div>{% endif %}
+      <a class="card-cta" href="/{{ app.slug }}/">View project <span aria-hidden="true">&rarr;</span></a>
+    </div>
+  </article>
   {% endfor %}
 </div>
 {% else %}
