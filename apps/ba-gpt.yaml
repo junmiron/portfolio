@@ -8,6 +8,7 @@ stack: [Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, C
 status: beta
 links:
   github: https://github.com/junmiron/TFM_BA_GPT_final
+  demo: /ba-gpt/demo/
   contact: https://www.linkedin.com/in/juanmanuelmiron/
 assets:
   screenshots: [1-interview.jpg, 2-settings.jpg]

@@ -8,9 +8,10 @@
 {% if app.intro %}<p class="intro">{{ app.intro }}</p>{% endif %}
 {% if app.context %}<p class="context">{{ app.context }}</p>{% endif %}
 
-{% if app._video or app._shots %}
+{% if app._video or app._shots or app.links.demo %}
 <section class="block">
   <h2>Demo</h2>
+  {% if app.links.demo %}<p class="demo-cta"><a href="{{ app.links.demo }}">Run the interactive interview replay &nearr;</a> — a real session, paused, sped up, with the internal agent messages on or off.</p>{% endif %}
   {% if app._video %}<video controls preload="metadata"{% if app._cover %} poster="{{ app._cover }}"{% endif %} src="{{ app._video }}"></video>{% endif %}
   {% if app._shots %}<div class="shots">{% for s in app._shots %}<img src="{{ s }}" alt="{{ app.name }} screenshot">{% endfor %}</div>{% endif %}
 </section>
