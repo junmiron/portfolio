@@ -28,7 +28,7 @@ SITE_DIR = ROOT / "site"
 TEMPLATES_DIR = ROOT / "templates"
 
 REQUIRED = ("slug", "name", "tagline", "problem", "status")
-STATUSES = ("live", "beta", "prototype")
+STATUSES = ("live", "beta", "technical preview", "prototype")
 
 
 def load_manifests():

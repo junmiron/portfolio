@@ -34,6 +34,9 @@ sections:                                # optional; "How it works" — question
     body: "One or two paragraphs"
 limitations:                             # optional; honest limits, replaces any "takeaways"
   - "One sentence"
+glossary:                                # optional; one-line explains of jargon for non-specialists
+  - term: "AutoGen"
+    def: "One sentence a non-specialist can follow"
 next_steps: "One line showing the project is alive"
 intro: "Outcome-first lead paragraph (1-3 sentences), under the tagline"
 context: "One line: thesis / personal project / client work, plus your role"
