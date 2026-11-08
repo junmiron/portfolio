@@ -22,7 +22,7 @@ sample:
   downloads: [functional_specification.pdf, functional_specification.html, functional_specification.md]
 tldr:
   - label: "What"
-    text: "An 11-agent team that interviews stakeholders and drafts a traceable functional spec."
+    text: "A 10-agent team that interviews stakeholders and drafts a traceable functional spec."
   - label: "You get"
     text: "The spec in HTML (the recommended way to read it), PDF (for signed or printed copies) and Markdown (the best base for AI coding agents), a Mermaid process diagram, and a timestamped Q&A trail."
   - label: "Why it's trustworthy"
@@ -34,8 +34,8 @@ tldr:
   - label: "Status"
     text: "Technical preview (v1.3.0), MIT licensed."
 sections:
-  - title: "How does the 11-agent pipeline work?"
-    body: "Eleven agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written."
+  - title: "How does the 10-agent pipeline work?"
+    body: "Ten agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written."
   - title: "How is the interview budgeted?"
     body: "Runs are capped by MAX_MESSAGES (default 300) and can only be ended by terminate_agent. The interviewer asks exactly one question per turn, and while the team waits for an answer, only the user may speak. Hand-offs are driven by explicit markers, not free conversation, so a run cannot drift or loop."
   - title: "What do you get at the end of a run?"
@@ -43,7 +43,7 @@ sections:
   - title: "How do you run it?"
     body: "Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice — local (Ollama, LM Studio) or cloud (OpenAI, Azure, Groq). Cloud providers need their API key, configurable per model lane from the in-app settings page. There is no hosted live run, but a recorded replay of a full session plays in the browser with no install and no key."
   - title: "What does the test suite cover?"
-    body: "An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering."
+    body: "An offline pytest suite runs the whole 10-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering."
 limitations:
   - "The interview is interactive: a human must answer every question unless human simulation is enabled."
   - "The summarizer only accepts the exact phrase APPROVE SUMMARY."

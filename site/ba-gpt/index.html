@@ -108,7 +108,7 @@
 
 <section class="block">
   <h2>TL;DR</h2>
-  <ul class="tldr"><li><strong>What:</strong> An 11-agent team that interviews stakeholders and drafts a traceable functional spec.</li><li><strong>You get:</strong> The spec in HTML (the recommended way to read it), PDF (for signed or printed copies) and Markdown (the best base for AI coding agents), a Mermaid process diagram, and a timestamped Q&amp;A trail.</li><li><strong>Why it&#39;s trustworthy:</strong> Every section traces to a logged answer. If a section is missing, a deterministic fallback fills it rather than letting the model invent one.</li><li><strong>Runs on:</strong> Your machine — a local LLM (Ollama, LM Studio) or a cloud LLM with its key (OpenAI, Azure, Groq and more).</li><li><strong>Stack:</strong> Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, ChromaDB/RAG, MCP, Mermaid, Pandoc + Typst.</li><li><strong>Status:</strong> Technical preview (v1.3.0), MIT licensed.</li></ul>
+  <ul class="tldr"><li><strong>What:</strong> A 10-agent team that interviews stakeholders and drafts a traceable functional spec.</li><li><strong>You get:</strong> The spec in HTML (the recommended way to read it), PDF (for signed or printed copies) and Markdown (the best base for AI coding agents), a Mermaid process diagram, and a timestamped Q&amp;A trail.</li><li><strong>Why it&#39;s trustworthy:</strong> Every section traces to a logged answer. If a section is missing, a deterministic fallback fills it rather than letting the model invent one.</li><li><strong>Runs on:</strong> Your machine — a local LLM (Ollama, LM Studio) or a cloud LLM with its key (OpenAI, Azure, Groq and more).</li><li><strong>Stack:</strong> Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, ChromaDB/RAG, MCP, Mermaid, Pandoc + Typst.</li><li><strong>Status:</strong> Technical preview (v1.3.0), MIT licensed.</li></ul>
 </section>
 
 
@@ -121,8 +121,8 @@
 <section class="block">
   <h2>How it works</h2>
   
-  <h3>How does the 11-agent pipeline work?</h3>
-  <p>Eleven agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&amp;A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written.</p>
+  <h3>How does the 10-agent pipeline work?</h3>
+  <p>Ten agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&amp;A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written.</p>
   
   <h3>How is the interview budgeted?</h3>
   <p>Runs are capped by MAX_MESSAGES (default 300) and can only be ended by terminate_agent. The interviewer asks exactly one question per turn, and while the team waits for an answer, only the user may speak. Hand-offs are driven by explicit markers, not free conversation, so a run cannot drift or loop.</p>
@@ -134,7 +134,7 @@
   <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice — local (Ollama, LM Studio) or cloud (OpenAI, Azure, Groq). Cloud providers need their API key, configurable per model lane from the in-app settings page. There is no hosted live run, but a recorded replay of a full session plays in the browser with no install and no key.</p>
   
   <h3>What does the test suite cover?</h3>
-  <p>An offline pytest suite runs the whole 11-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>
+  <p>An offline pytest suite runs the whole 10-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>
   
 </section>
 
