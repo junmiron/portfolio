@@ -13,7 +13,7 @@ links:
   contact: https://www.linkedin.com/in/juanmanuelmiron/
 assets:
   screenshots: [ba-gpt-react-ui.png, 1-interview.jpg, 2-settings.jpg]
-  video_short: short.mp4
+  video_short: ba-gpt-b2-brian-1x1.mp4
   cover: cover.jpg
 sample:
   note: "A real session: a laundry-service shop app, run end to end."
