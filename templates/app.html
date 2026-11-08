@@ -8,6 +8,13 @@
 {% if app.intro %}<p class="intro">{{ app.intro }}</p>{% endif %}
 {% if app.context %}<p class="context">{{ app.context }}</p>{% endif %}
 
+{% if app.links.github or app.links.huggingface or app.links.demo or app.links.contact %}
+<section class="block">
+  <h2>Links</h2>
+  <div class="links">{% if app.links.github %}<a href="{{ app.links.github }}" target="_blank" rel="noopener">GitHub &nearr;</a>{% endif %}{% if app.links.huggingface %}<a href="{{ app.links.huggingface }}" target="_blank" rel="noopener">Hugging Face &nearr;</a>{% endif %}{% if app.links.demo %}<a href="{{ app.links.demo }}">Demo replay &nearr;</a>{% endif %}{% if app.links.contact %}<a href="{{ app.links.contact }}" target="_blank" rel="noopener">Contact &nearr;</a>{% endif %}</div>
+</section>
+{% endif %}
+
 {% if app._video or app._shots or app.links.demo %}
 <section class="block">
   <h2>Demo</h2>
@@ -57,10 +64,11 @@
 <section class="block">
   <h2>Sample output</h2>
   <p>{{ app.sample.note }}</p>
-  {% if app.sample.diagram %}<figure><img src="/assets/{{ app.slug }}/sample/{{ app.sample.diagram }}" alt="Output from a sample run of {{ app.name }}">{% if app.sample.quote %}<figcaption>{{ app.sample.quote }}</figcaption>{% endif %}</figure>{% endif %}
+  {% if app.sample.quote %}<p class="sample-question">{{ app.sample.quote }}</p>{% endif %}
   {% if app.sample.downloads %}
   <div class="links">{% for d in app.sample.downloads %}<a href="/assets/{{ app.slug }}/sample/{{ d }}" download>{{ d }} &nearr;</a>{% endfor %}</div>
   {% endif %}
+  {% if app.sample.diagram %}<figure><img src="/assets/{{ app.slug }}/sample/{{ app.sample.diagram }}" alt="Output from a sample run of {{ app.name }}"></figure>{% endif %}
 </section>
 {% endif %}
 
@@ -75,18 +83,6 @@
 <section class="block">
   <h2>Next steps</h2>
   <p>{{ app.next_steps }}</p>
-</section>
-{% endif %}
-
-{% if app.links.github or app.links.huggingface or app.links.demo or app.links.contact %}
-<section class="block">
-  <h2>Links</h2>
-  <div class="links">
-    {% if app.links.github %}<a href="{{ app.links.github }}" target="_blank" rel="noopener">GitHub &nearr;</a>{% endif %}
-    {% if app.links.huggingface %}<a href="{{ app.links.huggingface }}" target="_blank" rel="noopener">Hugging Face &nearr;</a>{% endif %}
-    {% if app.links.demo %}<a href="{{ app.links.demo }}">Demo replay &nearr;</a>{% endif %}
-    {% if app.links.contact %}<a href="{{ app.links.contact }}" target="_blank" rel="noopener">Contact &nearr;</a>{% endif %}
-  </div>
 </section>
 {% endif %}
 

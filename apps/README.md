@@ -49,14 +49,14 @@ launched: YYYY-MM-DD
 
 1. Title, one-line outcome (tagline), status badge
 2. Intro (outcome first, not architecture) + context line
-3. Demo: embedded video and screenshots, high on the page
-4. TL;DR: 4-6 bullets, same order every app
-5. Problem: one or two human sentences, not a copy of the intro
-6. How it works: the technical detail, for engineers
-7. Stack
-8. Sample output: real run, inline diagram + downloads
-9. Limitations (honest), then Next steps (one line)
-10. Links: code, demo, contact
+3. Links: code, demo, contact
+4. Demo: embedded video and screenshots, high on the page
+5. TL;DR: 4-6 bullets, same order every app
+6. Problem: one or two human sentences, not a copy of the intro
+7. How it works: the technical detail, for engineers
+8. Stack
+9. Sample output: real run, inline diagram + downloads
+10. Limitations (honest), then Next steps (one line, shows the project is alive)
 
 Homepage cards can set `featured: true` to highlight an intentional first project. The featured card uses the first screenshot and up to three stack tags; maintain one featured project until more real app manifests exist.
 Required fields: `slug`, `name`, `tagline`, `problem`, `status`. Everything else is optional. If a field you want to show is missing or stale, ask the user (or read the app's repo README) — do not guess. Unknown numbers ship as `{{your number}}` in copy; they are never invented.

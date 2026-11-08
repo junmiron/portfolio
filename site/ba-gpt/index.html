@@ -63,6 +63,7 @@
   section.block { background: var(--panel); border: 1px solid var(--border); border-radius: 12px; padding: 20px 24px; margin-top: 20px; }
   h2 { font-size: 15px; text-transform: uppercase; letter-spacing: .8px; color: var(--muted); margin: 0 0 12px; }
   section.block p { margin: 0; }
+  section.block p.sample-question { margin-top: 8px; margin-bottom: 10px; color: var(--muted); }
   .chips span { display: inline-block; background: #1a2030; border: 1px solid var(--border); border-radius: 999px;
                 padding: 3px 12px; font-size: 13px; margin: 0 6px 6px 0; color: var(--text); }
   .links a { display: inline-block; margin-right: 18px; font-weight: 500; }
@@ -87,6 +88,13 @@
 <p class="lead">An AI business analyst that interviews you about your project, then writes the functional spec for you.</p>
 <p class="intro">BA-GPT is an AI business analyst that interviews you about your project, then writes the functional spec for you: a PDF, a process diagram, and a full audit trail linking every requirement back to a question you answered.</p>
 <p class="context">Built as my Master&#39;s thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally, with a local LLM or a cloud LLM — a key is only needed for cloud services.</p>
+
+
+<section class="block">
+  <h2>Links</h2>
+  <div class="links"><a href="https://github.com/junmiron/ba-gpt" target="_blank" rel="noopener">GitHub &nearr;</a><a href="/ba-gpt/demo/">Demo replay &nearr;</a><a href="https://www.linkedin.com/in/juanmanuelmiron/" target="_blank" rel="noopener">Contact &nearr;</a></div>
+</section>
+
 
 
 <section class="block">
@@ -149,10 +157,11 @@
 <section class="block">
   <h2>Sample output</h2>
   <p>A real session: a laundry-service shop app, run end to end.</p>
-  <figure><img src="/assets/ba-gpt/sample/process_diagram.png" alt="Output from a sample run of BA-GPT"><figcaption>QUESTION: What is the primary end-to-end service flow for the Laundry Service Shop app, from customer request pickup to delivery?</figcaption></figure>
+  <p class="sample-question">QUESTION: What is the primary end-to-end service flow for the Laundry Service Shop app, from customer request pickup to delivery?</p>
   
   <div class="links"><a href="/assets/ba-gpt/sample/functional_specification.pdf" download>functional_specification.pdf &nearr;</a><a href="/assets/ba-gpt/sample/functional_specification.html" download>functional_specification.html &nearr;</a><a href="/assets/ba-gpt/sample/functional_specification.md" download>functional_specification.md &nearr;</a></div>
   
+  <figure><img src="/assets/ba-gpt/sample/process_diagram.png" alt="Output from a sample run of BA-GPT"></figure>
 </section>
 
 
@@ -167,18 +176,6 @@
 <section class="block">
   <h2>Next steps</h2>
   <p>Porting the agent layer off AutoGen (no longer being developed) to LangChain, Microsoft Agent Framework and LangGraph. Also on the roadmap: Docker/Compose packaging for one-command setup, and authentication for the /api/config endpoint before any non-local deployment.</p>
-</section>
-
-
-
-<section class="block">
-  <h2>Links</h2>
-  <div class="links">
-    <a href="https://github.com/junmiron/ba-gpt" target="_blank" rel="noopener">GitHub &nearr;</a>
-    
-    <a href="/ba-gpt/demo/">Demo replay &nearr;</a>
-    <a href="https://www.linkedin.com/in/juanmanuelmiron/" target="_blank" rel="noopener">Contact &nearr;</a>
-  </div>
 </section>
 
 
