@@ -69,6 +69,12 @@
   .links a { display: inline-block; margin-right: 18px; font-weight: 500; }
   .demo-cta { margin: 0 0 12px; font-size: 15px; }
   .demo-cta a { font-weight: 600; }
+  .demo-intro { color: var(--muted); margin: 0 0 14px; font-size: 14.5px; }
+  .demo-videos { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; margin-top: 14px; }
+  .demo-video { border: 1px solid var(--border); border-radius: 10px; background: #151a25; padding: 14px; }
+  .demo-video h3 { font-size: 15px; margin: 0 0 6px; color: var(--text); }
+  .demo-note { margin: 0 0 10px; color: var(--muted); font-size: 13.5px; }
+  .demo-video video { width: 100%; max-width: 540px; border-radius: 8px; border: 1px solid var(--border); background: #000; }
   .shots { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; margin-top: 16px; }
   .shots img { width: 100%; border-radius: 8px; border: 1px solid var(--border); display: block; }
   video { width: 100%; max-width: 540px; border-radius: 8px; border: 1px solid var(--border); background: #000; }
@@ -100,7 +106,28 @@
 <section class="block">
   <h2>Demo</h2>
   <p class="demo-cta"><a href="/ba-gpt/demo/">Run the interactive interview replay &nearr;</a> — a real session, paused, sped up, with the internal agent messages on or off.</p>
-  <video controls preload="metadata" poster="/assets/ba-gpt/cover.jpg" src="/assets/ba-gpt/ba-gpt-b2-1x1.mp4"></video>
+  <p class="demo-intro">The same session, shown two ways: a short stakeholder overview first, then the technical walkthrough.</p>
+
+  <div class="demo-videos">
+
+    <article class="demo-video">
+      <h3>Plain-language overview</h3>
+      <p class="demo-note">What BA-GPT does, in 57 seconds: goal or transcript, interview, spec, diagram, and formats.</p>
+      <video controls preload="metadata" poster="/assets/ba-gpt/cover-intro.jpg" src="/assets/ba-gpt/ba-gpt-c-1x1-subs.mp4">
+        <track kind="captions" src="/assets/ba-gpt/ba-gpt-c-1x1-subs.vtt" srclang="en" label="English">
+      </video>
+    </article>
+
+    <article class="demo-video">
+      <h3>Technical walkthrough</h3>
+      <p class="demo-note">For a technical audience: agent pipeline, message cap, review loop, and run controls.</p>
+      <video controls preload="metadata" poster="/assets/ba-gpt/cover.jpg" src="/assets/ba-gpt/ba-gpt-b2-1x1.mp4">
+
+      </video>
+    </article>
+
+  </div>
+
   <div class="shots"><img src="/assets/ba-gpt/screenshots/ba-gpt-react-ui.png" alt="BA-GPT screenshot"><img src="/assets/ba-gpt/screenshots/1-interview.jpg" alt="BA-GPT screenshot"><img src="/assets/ba-gpt/screenshots/2-settings.jpg" alt="BA-GPT screenshot"></div>
 </section>
 
@@ -120,22 +147,22 @@
 
 <section class="block">
   <h2>How it works</h2>
-  
+
   <h3>How does the 10-agent pipeline work?</h3>
   <p>Ten agents sit in one AutoGen 0.7.5 SelectorGroupChat. The planning agent decomposes the task and hands off with [ASSIGNMENT] markers; the interviewer asks one question per turn and every Q&amp;A pair is saved to interview.jsonl. A summarizer requires the exact phrase APPROVE SUMMARY. The writer, glossary and use-case agents draft the spec; a checker bounces missing sections back up to three rounds, then a deterministic fallback fills the gaps. A diagram creator and a Mermaid reviewer produce the process diagram. Only terminate_agent can end a run, and only after the deliverables are written.</p>
-  
+
   <h3>How is the interview budgeted?</h3>
   <p>Runs are capped by MAX_MESSAGES (default 300) and can only be ended by terminate_agent. The interviewer asks exactly one question per turn, and while the team waits for an answer, only the user may speak. Hand-offs are driven by explicit markers, not free conversation, so a run cannot drift or loop.</p>
-  
+
   <h3>What do you get at the end of a run?</h3>
   <p>A session folder with the full functional spec in Markdown (introduction, scope, functional and non-functional requirements, roles and personas, assumptions and constraints, open items, use cases and user stories, glossary, dependencies and risks), a Typst-typeset PDF with cover page and linked contents, a self-contained HTML file with the diagram inlined as vector SVG, the Mermaid source plus rendered PNG and SVG, and a timestamped Q&amp;A audit trail. Tall diagrams are split into page-sized bands so nothing is clipped.</p>
-  
+
   <h3>How do you run it?</h3>
   <p>Python 3.11 or 3.13, Node with mermaid-cli for diagrams, and an LLM of your choice — local (Ollama, LM Studio) or cloud (OpenAI, Azure, Groq). Cloud providers need their API key, configurable per model lane from the in-app settings page. There is no hosted live run, but a recorded replay of a full session plays in the browser with no install and no key.</p>
-  
+
   <h3>What does the test suite cover?</h3>
   <p>An offline pytest suite runs the whole 10-agent pipeline end to end with a scripted model client: no API key, no network. It covers selector routing, the termination guard, config hygiene, the FastAPI contract, transcript ingestion, spec continuation and Typst rendering.</p>
-  
+
 </section>
 
 
@@ -158,9 +185,9 @@
   <h2>Sample output</h2>
   <p>A real session: a laundry-service shop app, run end to end.</p>
   <p class="sample-question">QUESTION: What is the primary end-to-end service flow for the Laundry Service Shop app, from customer request pickup to delivery?</p>
-  
+
   <div class="links"><a href="/assets/ba-gpt/sample/functional_specification.pdf" download>functional_specification.pdf &nearr;</a><a href="/assets/ba-gpt/sample/functional_specification.html" download>functional_specification.html &nearr;</a><a href="/assets/ba-gpt/sample/functional_specification.md" download>functional_specification.md &nearr;</a></div>
-  
+
   <figure><img src="/assets/ba-gpt/sample/process_diagram.png" alt="Output from a sample run of BA-GPT"></figure>
 </section>
 

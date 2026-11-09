@@ -3,6 +3,7 @@ name: BA-GPT
 tagline: "An AI business analyst that interviews you about your project, then writes the functional spec for you."
 intro: "BA-GPT is an AI business analyst that interviews you about your project, then writes the functional spec for you: a PDF, a process diagram, and a full audit trail linking every requirement back to a question you answered."
 context: "Built as my Master's thesis in Artificial Intelligence on multi-agent requirements elicitation, designed and built by me. It runs locally, with a local LLM or a cloud LLM — a key is only needed for cloud services."
+demo_intro: "The same session, shown two ways: a short stakeholder overview first, then the technical walkthrough."
 problem: "Requirements work is the slow part of delivery. I wanted to find out whether an agent team could own the interview and draft the spec, with every claim traceable to a logged answer."
 stack: [Python, AutoGen (SelectorGroupChat), FastAPI, React, TypeScript, Vite, ChromaDB/RAG, MCP, Mermaid, Pandoc + Typst]
 featured: true
@@ -12,8 +13,17 @@ links:
   demo: /ba-gpt/demo/
   contact: https://www.linkedin.com/in/juanmanuelmiron/
 assets:
+  videos:
+    - file: ba-gpt-c-1x1-subs.mp4
+      cover: cover-intro.jpg
+      captions: ba-gpt-c-1x1-subs.vtt
+      label: "Plain-language overview"
+      note: "What BA-GPT does, in 57 seconds: goal or transcript, interview, spec, diagram, and formats."
+    - file: ba-gpt-b2-1x1.mp4
+      cover: cover.jpg
+      label: "Technical walkthrough"
+      note: "For a technical audience: agent pipeline, message cap, review loop, and run controls."
   screenshots: [ba-gpt-react-ui.png, 1-interview.jpg, 2-settings.jpg]
-  video_short: ba-gpt-b2-1x1.mp4
   cover: cover.jpg
 sample:
   note: "A real session: a laundry-service shop app, run end to end."

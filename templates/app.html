@@ -15,11 +15,24 @@
 </section>
 {% endif %}
 
-{% if app._video or app._shots or app.links.demo %}
+{% if app._videos or app._shots or app.links.demo %}
 <section class="block">
   <h2>Demo</h2>
   {% if app.links.demo %}<p class="demo-cta"><a href="{{ app.links.demo }}">Run the interactive interview replay &nearr;</a> — a real session, paused, sped up, with the internal agent messages on or off.</p>{% endif %}
-  {% if app._video %}<video controls preload="metadata"{% if app._cover %} poster="{{ app._cover }}"{% endif %} src="{{ app._video }}"></video>{% endif %}
+  {% if app.demo_intro %}<p class="demo-intro">{{ app.demo_intro }}</p>{% endif %}
+  {% if app._videos %}
+  <div class="demo-videos">
+    {% for video in app._videos %}
+    <article class="demo-video">
+      {% if video.label %}<h3>{{ video.label }}</h3>{% endif %}
+      {% if video.note %}<p class="demo-note">{{ video.note }}</p>{% endif %}
+      <video controls preload="metadata"{% if video.cover %} poster="{{ video.cover }}"{% endif %} src="{{ video.src }}">
+        {% if video.captions %}<track kind="captions" src="{{ video.captions }}" srclang="en" label="English">{% endif %}
+      </video>
+    </article>
+    {% endfor %}
+  </div>
+  {% endif %}
   {% if app._shots %}<div class="shots">{% for s in app._shots %}<img src="{{ s }}" alt="{{ app.name }} screenshot">{% endfor %}</div>{% endif %}
 </section>
 {% endif %}

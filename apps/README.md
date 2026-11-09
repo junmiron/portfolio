@@ -22,6 +22,12 @@ assets:
   video_full: demo.mp4           # raw recording; never overwritten by edits
   video_short: short.mp4         # post-ready clip (4:5 or 9:16, H.264 + AAC)
   cover: cover.jpg               # thumbnail for the site card and LinkedIn posts
+  videos:                        # optional; replaces video_short for multi-clip demos
+    - file: overview.mp4
+      label: "Plain-language overview"
+      note: "Optional audience-facing one-liner"
+      cover: cover-overview.jpg
+      captions: overview.vtt
 sample:                                  # optional; real output from an actual run
   note: "One line: what the sample is"
   quote: "One real line from the output (e.g. a question asked)"
@@ -50,7 +56,7 @@ launched: YYYY-MM-DD
 1. Title, one-line outcome (tagline), status badge
 2. Intro (outcome first, not architecture) + context line
 3. Links: code, demo, contact
-4. Demo: embedded video and screenshots, high on the page
+4. Demo: labeled video(s) and screenshots, high on the page
 5. TL;DR: 4-6 bullets, same order every app
 6. Problem: one or two human sentences, not a copy of the intro
 7. How it works: the technical detail, for engineers

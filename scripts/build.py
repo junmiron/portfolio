@@ -46,6 +46,26 @@ def load_manifests():
 
         base = ASSETS_DIR / data["slug"]
         assets = data.get("assets") or {}
+
+        videos = []
+        for item in assets.get("videos") or []:
+            video_file = item.get("file")
+            video_cover = item.get("cover")
+            video_captions = item.get("captions")
+
+            if not video_file or not (base / video_file).is_file():
+                print(f"  warn: {path.name}: assets.videos -> missing file {base / video_file}")
+                continue
+
+            entry = {
+                "src": f"/assets/{data['slug']}/{video_file}",
+                "label": item.get("label") or None,
+                "note": item.get("note") or None,
+                "cover": f"/assets/{data['slug']}/{video_cover}" if video_cover and (base / video_cover).is_file() else None,
+                "captions": f"/assets/{data['slug']}/{video_captions}" if video_captions and (base / video_captions).is_file() else None,
+            }
+            videos.append(entry)
+
         for key in ("video_full", "video_short", "cover"):
             f = assets.get(key)
             if f and not (base / f).is_file():
@@ -59,11 +79,23 @@ def load_manifests():
             else:
                 print(f"  warn: {path.name}: missing screenshot {p}")
 
-        video_short = assets.get("video_short")
         cover = assets.get("cover")
+        legacy_video = assets.get("video_short")
+        legacy_videos = []
+        if legacy_video and (base / legacy_video).is_file():
+            legacy_videos.append({
+                "src": f"/assets/{data['slug']}/{legacy_video}",
+                "label": None,
+                "note": None,
+                "cover": f"/assets/{data['slug']}/{cover}" if cover and (base / cover).is_file() else None,
+                "captions": None,
+            })
+
         data["_shots"] = shots
-        data["_video"] = f"/assets/{data['slug']}/{video_short}" if (video_short and (base / video_short).is_file()) else None
-        data["_cover"] = f"/assets/{data['slug']}/{cover}" if (cover and (base / cover).is_file()) else None
+        data["_videos"] = videos or legacy_videos
+        data["_video"] = videos[0]["src"] if videos else (legacy_videos[0]["src"] if legacy_videos else None)
+        data["_cover"] = f"/assets/{data['slug']}/{cover}" if cover and (base / cover).is_file() else None
+        data.setdefault("demo_intro", None)
 
         # normalize optional fields for the templates
         data.setdefault("stack", [])
@@ -130,11 +162,15 @@ def main():
     copy_static()
 
     env = Environment(loader=FileSystemLoader(TEMPLATES_DIR), undefined=StrictUndefined, autoescape=True)
-    (SITE_DIR / "index.html").write_text(env.get_template("index.html").render(apps=apps), encoding="utf-8")
+
+    def clean_html(text: str) -> str:
+        return "\n".join(line.rstrip() for line in text.splitlines()) + "\n"
+
+    (SITE_DIR / "index.html").write_text(clean_html(env.get_template("index.html").render(apps=apps)), encoding="utf-8")
     for app in apps:
         out_dir = SITE_DIR / app["slug"]
         out_dir.mkdir(parents=True, exist_ok=True)
-        (out_dir / "index.html").write_text(env.get_template("app.html").render(app=app), encoding="utf-8")
+        (out_dir / "index.html").write_text(clean_html(env.get_template("app.html").render(app=app)), encoding="utf-8")
 
     print(f"built {len(apps)} app page(s): " + (", ".join(a["slug"] for a in apps) or "(none)"))
 
